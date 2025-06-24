@@ -1,0 +1,28 @@
+<h2>プロフィール編集</h2>
+<%= form_with model: @user do |f| %>
+  <%= f.label :Name %><br>
+  <%= f.text_field :name %>
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.label :current_password %><br>
+    <%= f.password_field :current_password %>
+  </div>
+
+  <div>
+    <%= f.submit "更新" %>
+  </div>
+<% end %>

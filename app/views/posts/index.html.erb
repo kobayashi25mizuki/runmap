@@ -1,0 +1,9 @@
+<% @posts.each do |post| %>
+  <div>
+    <%= link_to post_path(post.id) do %>
+      <p>タイトル: <%= post.title %></p>
+    <% end %>
+    <p>本文: <%= post.body %></p>
+    <p>ユーザーネーム: <%= post.user.name %></p>
+  </div>
+<% end %>
