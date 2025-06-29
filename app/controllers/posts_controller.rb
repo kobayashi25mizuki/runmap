@@ -9,9 +9,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(@post.id)
     else
-      flash[:notice] = "投稿に失敗しました。"
+      flash[:alert] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post.id)
     else
-      flash[:notice] = "編集に失敗しました。"
+      flash[:alert] = "編集に失敗しました。"
       render :edit
     end
   end
