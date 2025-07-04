@@ -13,6 +13,7 @@
   <body>
     <header>
       <% if user_signed_in? %>
+        <%= render 'searches/form' %>
         <li>
           <%= link_to "マイページ", user_path(current_user.id) %>
         </li>
