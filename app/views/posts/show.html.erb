@@ -1,30 +1,58 @@
-<div>
-  <p>タイトル: <%= @post.title %>
-  <p>本文: <%= @post.body %></p>
-  <%= link_to user_path(@post.user_id) do %>
-    <p>ユーザーネーム: <%= @post.user.name %></p>
-  <% end %>
-  <p>投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    <%= link_to "編集", edit_post_path(@post.id) %>
-  <% end %>
-</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
 
-<div>
-  <p>コメント件数：<%= @post.post_comments.count %></p>
-  <% @post.post_comments.each do |post_comment| %>
-    <%= post_comment.user.name %>
-    <%= post_comment.comment %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-    <% end %>
-  <% end %>
-</div>
-<div>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+      <div class="text-center mb-3">
+        <%= image_tag @post.get_image, class: "img-fluid rounded" %>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h4 class="card-title">タイトル: <%= @post.title %></h4>
+          <p class="card-text">本文: <%= @post.body %></p>
+          <p class="text-muted">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+
+          <p>
+            <%= link_to user_path(@post.user_id), class: "text-decoration-none" do %>
+              ユーザーネーム: <strong><%= @post.user.name %></strong>
+            <% end %>
+          </p>
+
+          <% if @post.user == current_user %>
+            <div class="mt-3">
+              <%= link_to "編集", edit_post_path(@post), class: "btn btn-outline-primary btn-sm me-2" %>
+              <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <h5>コメント（<%= @post.post_comments.count %>件）</h5>
+      <div class="mb-4">
+        <% @post.post_comments.each do |post_comment| %>
+          <div class="border rounded p-3 mb-2">
+            <p><strong><%= post_comment.user.name %></strong> さん</p>
+            <p><%= post_comment.comment %></p>
+            <p class="text-muted"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+            <% if post_comment.user == current_user %>
+              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, data: { confirm: "コメントを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="card p-3">
+        <h5 class="mb-3">コメントを書く</h5>
+        <%= form_with model: [@post, @post_comment], local: true do |f| %>
+          <div class="mb-3">
+            <%= f.text_area :comment, rows: 4, class: "form-control", placeholder: "コメントをここに" %>
+          </div>
+          <div class="text-end">
+            <%= f.submit "送信する", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
 </div>
