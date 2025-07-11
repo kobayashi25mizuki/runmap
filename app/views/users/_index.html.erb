@@ -1,3 +1,16 @@
-<% users.each do |user| %>
-    <td><%= user.name %></td>
-<% end %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <% users.each do |user| %>
+            <p>
+                ユーザーネーム: 
+                <%= link_to user_path(user.id), class: "text-decoration-none" do %>
+                    <strong><%= user.name %></strong>
+                <% end %>
+            </p>
+        <% end %>
+
+    </div>
+  </div>
+</div>

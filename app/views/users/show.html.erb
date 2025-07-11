@@ -1,19 +1,35 @@
-<div>
-  <h3><%= @user.name %></h3>
-  <% if @user == current_user %>
-    <%= link_to "プロフィール編集", edit_user_path(@user) %>
-    <%= link_to "削除", user_path(@user), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
-</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
 
-<% @posts.each do |post| %>
-<div>
-  <%= link_to post_path(post.id) do %>
-    <%= post.title %>
-  <% end %>
-  
-  <P>説明：<%= post.body %></p>
-  <p>ユーザーネーム：<%= post.user.name %></p>
-  <p>"<%= post.post_comments.count %> コメント"</p>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0"><%= @user.name %></h3>
+        <% if @user == current_user %>
+          <div>
+            <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm me-2" %>
+            <%= link_to "削除", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+
+      <% @posts.each do |post| %>
+        <div class="card mb-4">
+          <%= image_tag post.get_image, class: "img-fluid rounded", style: "object-fit: contain; max-height: 200px; width: 100%;" %>
+          
+          <div class="align-self-center">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to post.title, post_path(post.id), class: "text-decoration-none text-dark" %>
+              </h5>
+
+              <p class="card-text">説明：<%= post.body %></p>
+              <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
+              <p class="text-muted">コメント数：<%= post.post_comments.count %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
 </div>
-<% end %>
