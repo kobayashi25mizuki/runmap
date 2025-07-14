@@ -15,7 +15,22 @@
                 
                 <p class="card-text">説明：<%= post.body %></p>
                 <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
-                <p class="text-muted">コメント数：<%= post.post_comments.count %></p>
+                <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
+
+                <% if post.favorited_by?(current_user) %>
+                  <p>
+                    <%= link_to post_favorite_path(post), method: :delete do %>
+                      ♥<%= post.favorites.count %> いいね
+                    <% end %>
+                  </p>
+                <% else %>
+                  <p>
+                    <%= link_to post_favorite_path(post), method: :post do %>
+                      ♡<%= post.favorites.count %> いいね
+                    <% end %>
+                  </p>
+                <% end %>
+
               </div>
             </div>
           </div>
