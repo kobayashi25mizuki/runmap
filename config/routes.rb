@@ -9,13 +9,29 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
   root to: 'homes#top'
+
   resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  resources :users, only: [:show, :destroy, :edit, :update]
+
+  resources :users, only: [:index, :show, :destroy, :edit, :update]
+
   get "home/about" => "homes#about", as: "about"
+
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
+    resource :group_users, only: [:create, :destroy] do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
+    resources :event_notices, only: [:new, :create]
+    get "event_notices" => "event_notices#sent"
+  end
+
   get '/search', to: 'searches#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
