@@ -1,9 +1,75 @@
-<h1>全ユーザー一覧</h1>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= user.name %> - <%= user.email %>
-      <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %> 
-    </li>
-  <% end %>
-</ul>
+<div class="container my-5">
+
+  <h2 class="mb-3">全ユーザー一覧</h2>
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to '削除', admin_user_path(user), method: :delete,
+                        data: { confirm: '本当に削除しますか？' },
+                        class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2 class="mt-5 mb-3">全グループ一覧</h2>
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>グループ名</th>
+        <th>紹介文</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.name %></td>
+          <td><%= group.introduction %></td>
+          <td>
+            <%= link_to '削除', admin_group_path(group), method: :delete,
+                        data: { confirm: '本当に削除しますか？' },
+                        class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2 class="mt-5 mb-3">全コメント一覧</h2>
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>ユーザー名</th>
+        <th>コメント内容</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @post_comments.each do |post_comment| %>
+        <tr>
+          <td><%= post_comment.user.name %></td>
+          <td><%= post_comment.comment %></td>
+          <td>
+            <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete,
+                        data: { confirm: '本当に削除しますか？' },
+                        class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
