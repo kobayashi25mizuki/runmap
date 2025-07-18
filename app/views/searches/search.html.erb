@@ -4,4 +4,7 @@
 <% elsif @model == 'post' %>
 	<h3>Posts search for "<%= @content %>"</h3>
   <%= render 'posts/index', posts: @records %>
+<% elsif @model == 'group' %>
+	<h3>Groups search for "<%= @content %>"</h3>
+  <%= render 'groups/index', groups: @records %>
 <% end %>

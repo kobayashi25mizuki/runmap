@@ -3,7 +3,7 @@
 <%= link_to "グループ作成", new_group_path, class: "btn btn-primary mb-4" %>
 
 <div class="row">
-  <% @groups.each do |group| %>
+  <% groups.each do |group| %>
     <div class="col-md-6 col-lg-4 mb-4">
       <div class="card h-100 shadow-sm">
         <%= link_to group_path(group) do %>

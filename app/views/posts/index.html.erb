@@ -5,7 +5,9 @@
         <% @posts.each do |post| %>
           <div class="card mb-4">
             <div class="pt-4">
-              <%= image_tag post.get_image, class: "img-fluid rounded", style: "object-fit: contain; max-height: 200px; width: 100%;" %>
+              <%= link_to post_path(post.id) do %>
+                <%= image_tag post.get_image, class: "img-fluid rounded", style: "object-fit: contain; max-height: 200px; width: 100%;" %>
+              <% end %>
             </div>
             <div class="align-self-center">
               <div class="card-body">
