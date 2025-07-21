@@ -6,9 +6,20 @@
         <%= image_tag @post.get_image, class: "img-fluid rounded" %>
       </div>
 
+      <p>緯度: <%= @post.latitude.inspect %></p>
+      <p>経度: <%= @post.longitude.inspect %></p>
+
+      <% if @post.latitude.present? && @post.longitude.present? %>
+        <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>"></div>
+        <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+      <% else %>
+        <p>地図情報は登録されていません</p>
+      <% end %>
+
       <div class="card mb-4">
         <div class="card-body">
           <h4 class="card-title">タイトル: <%= @post.title %></h4>
+          <p class="card-title"><span><i class="fa-solid fa-location-dot"></i> <%= @post.address %></span></p>
           <p class="card-text">本文: <%= @post.body %></p>
           <p class="text-muted">投稿日: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
 

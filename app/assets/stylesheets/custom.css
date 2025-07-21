@@ -1,5 +1,5 @@
 body {
-  background-color: #ffffff;
+  background-color: #e6e1d3;
   color: #000000;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
@@ -74,6 +74,11 @@ a:hover {
 img.rounded {
   border-radius: 8px;
   object-fit: contain;
+}
+
+#map {
+  width: 100%;
+  height: calc(100vh - 88px - 179px);
 }
 
 footer {

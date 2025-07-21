@@ -40,7 +40,7 @@
                     <% end %>
                   </li>
                   <li class="nav-item">
-                    <%= link_to new_post_path, class: 'nav-link text-dark' do %>
+                    <%= link_to new_post_path, class: 'nav-link text-dark', data: {turbolinks: "false"} do %>
                       <i class="fa-solid fa-pen mr-1"></i> 投稿フォーム
                     <% end %>
                   </li>
@@ -82,5 +82,7 @@
       <%= render 'searches/form' %>
       <%= yield %>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 </html>
