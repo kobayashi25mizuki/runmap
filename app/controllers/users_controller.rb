@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update, :delete]
+  before_action :ensure_guest_user, only: [:edit]
 
   def index
     @users = User.all
@@ -39,6 +40,14 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless user.id == current_user.id
       redirect_to user_path(current_user.id)
+    end
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      flash[:guest_alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      redirect_to user_path(current_user)
     end
   end
 

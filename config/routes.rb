@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     get "event_notices" => "event_notices#sent"
   end
 
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
+
   resource :map, only: [:show]
 
   get '/search', to: 'searches#search'
