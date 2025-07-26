@@ -78,7 +78,10 @@ img.rounded {
 
 #map {
   width: 100%;
-  height: calc(100vh - 88px - 179px);
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  background-color: #e9ecef;
 }
 
 footer {
@@ -88,4 +91,14 @@ footer {
   padding: 1rem 0;
   margin-top: 3rem;
   font-size: 0.9rem;
+}
+
+.image-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
