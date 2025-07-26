@@ -24,16 +24,8 @@ class Group < ApplicationRecord
     group_users.approved.includes(:user).map(&:user)
   end
 
-  def self.search_for(content, method)
-    if method == 'perfect'
-      Group.where(name: content)
-    elsif method == 'forward'
-      Group.where('name LIKE ?', content + '%')
-    elsif method == 'backward'
-      Group.where('name LIKE ?', '%' + content)
-    else
-      Group.where('name LIKE ?', '%' + content + '%')
-    end
+  def self.search_for(content)
+    where('name LIKE ?', "%#{content}%")
   end
   
 end
