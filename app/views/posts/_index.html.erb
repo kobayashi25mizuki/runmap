@@ -1,46 +1,39 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+<div class="container py-5">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% posts.each do |post| %>
+      <div class="col mb-4">
+        <div class="card h-100 shadow-sm">
 
-        <% posts.each do |post| %>
-          <div class="card mb-4">
-            <div class="pt-4">
-              <%= link_to post_path(post.id) do %>
-                <div class="image-container">
-                  <%= image_tag post.get_image, class: "img-fluid rounded", style: "width: 100%; height: 100%; object-fit: cover;" %>
-                </div>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <% end %>
+
+
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5 class="card-title">
+              <%= link_to post.title, post_path(post.id), class: "text-decoration-none text-dark" %>
+            </h5>
+            <p class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-location-dot"></i> <%= post.address %></p>
+            <p class="card-text mb-2">説明：<%= post.body %></p>
+            <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
+            <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
+            <p class="text-muted mb-1">都道府県：<%= post.genre.prefecture %></p>
+
+
+            <div class="mt-2">
+              <% if post.favorited_by?(current_user) %>
+                <%= link_to post_favorite_path(post), method: :delete, class: "text-danger text-decoration-none" do %>
+                  ♥ <%= post.favorites.count %> いいね
+                <% end %>
+              <% else %>
+                <%= link_to post_favorite_path(post), method: :post, class: "text-muted text-decoration-none" do %>
+                  ♡ <%= post.favorites.count %> いいね
+                <% end %>
               <% end %>
             </div>
-            <div class="align-self-center">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <%= link_to post.title, post_path(post.id), class: "text-decoration-none text-dark" %>
-                </h5>
-                <p class="card-title"><span><i class="fa-solid fa-location-dot"></i> <%= post.address %></span></p>
-                <p class="card-text">説明：<%= post.body %></p>
-                <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
-                <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
-                <p class="text-muted mb-1"><%= post.genre.prefecture %></p>
-                <% if post.favorited_by?(current_user) %>
-                  <p>
-                    <%= link_to post_favorite_path(post), method: :delete do %>
-                      ♥<%= post.favorites.count %> いいね
-                    <% end %>
-                  </p>
-                <% else %>
-                  <p>
-                    <%= link_to post_favorite_path(post), method: :post do %>
-                      ♡<%= post.favorites.count %> いいね
-                    <% end %>
-                  </p>
-                <% end %>
-
-              </div>
-            </div>
           </div>
-        <% end %>
+        </div>
       </div>
-
-    </div>
+    <% end %>
   </div>
 </div>
