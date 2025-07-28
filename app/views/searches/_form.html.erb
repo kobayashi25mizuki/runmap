@@ -2,7 +2,7 @@
   <div class="d-flex flex-row justify-content-end mb-3">
     <%= form_with url: search_path, method: :get, local: true, html: { class: "d-flex flex-row align-items-center", role: "search" } do |f| %>
       <%= f.text_field :content, placeholder: "検索", class: "form-control form-control-sm me-2", style: "min-width: 200px;" %>
-      <%= f.select :model, options_for_select({ "ユーザー" => "user", "グループ" => "group", "投稿" => "post" }), {}, class: "form-select form-select-sm me-2", style: "width: 100px;" %>
+      <%= f.select :model, options_for_select({ "ユーザー" => "user", "グループ" => "group", "投稿" => "post","ジャンル" => "genre" }), {}, class: "form-select form-select-sm me-2", style: "width: 100px;" %>
       <%= f.submit "検索", class: "btn btn-sm btn-outline-primary" %>
     <% end %>
   </div>

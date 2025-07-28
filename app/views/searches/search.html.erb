@@ -1,10 +1,16 @@
 <% if @model == 'user' %>
-	<h3>Users search for "<%= @content %>"</h3>
+  <h3>Users search for "<%= @content %>"</h3>
   <%= render 'users/index', users: @records %>
+
 <% elsif @model == 'post' %>
-	<h3>Posts search for "<%= @content %>"</h3>
+  <h3>Posts search for "<%= @content %>"</h3>
   <%= render 'posts/index', posts: @records %>
+
 <% elsif @model == 'group' %>
-	<h3>Groups search for "<%= @content %>"</h3>
+  <h3>Groups search for "<%= @content %>"</h3>
   <%= render 'groups/index', groups: @records %>
+
+<% elsif @model == 'genre' %>
+  <h3>Posts in genre "<%= @content %>"</h3>
+  <%= render 'posts/index', posts: @records %>
 <% end %>

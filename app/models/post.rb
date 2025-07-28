@@ -19,8 +19,13 @@ class Post < ApplicationRecord
     image
   end
 
-  def self.search_for(content)
-    where('title LIKE ?', "%#{content}%")
+  def self.search_for(content, field = :title)
+    case field
+    when :genre
+      joins(:genre).where('genres.prefecture LIKE ?', "%#{content}%")
+    else
+      where('title LIKE ?', "%#{content}%")
+    end
   end
 
   def favorited_by?(user)
