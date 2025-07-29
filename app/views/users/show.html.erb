@@ -1,62 +1,77 @@
 <div class="container mt-5">
+
+  <% if flash[:guest_alert] %>
+    <div class="alert alert-danger text-center">
+      <%= flash[:guest_alert] %>
+    </div>
+  <% end %>
+  
   <div class="row justify-content-center">
     <div class="col-md-8">
-
-      <% if flash[:guest_alert] %>
-        <div class="alert alert-danger text-center">
-          <%= flash[:guest_alert] %>
-        </div>
-      <% end %>
-
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="mb-0"><%= @user.name %></h3>
+      <div class="card shadow-sm p-4 position-relative">
+      
         <% if @user == current_user && !@user.guest_user? %>
-          <div>
+          <div class="btn-top-right">
             <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm me-2" %>
             <%= link_to "削除", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-sm" %>
           </div>
         <% end %>
+        
+
+        <div class="d-flex flex-column align-items-center text-center">
+
+          <div class="mb-3">
+            <%= image_tag @user.get_image, class: "rounded-circle shadow", style: "width: 150px; height: 150px; object-fit: cover;" %>
+          </div>
+
+          <h3 class="mb-2"><%= @user.name %></h3>
+
+          <p class="mb-3" style="white-space: pre-line;">
+            <%= @user.profile %>
+          </p>
+
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="container py-5">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <% @posts.each do |post| %>
-          <div class="col mb-4">
-            <div class="card h-100 shadow-sm">
-    
-              <%= link_to post_path(post.id) do %>
-                <%= image_tag post.get_image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
-              <% end %>
-    
-    
-              <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">
-                  <%= link_to post.title, post_path(post.id), class: "text-decoration-none text-dark" %>
-                </h5>
-                <p class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-location-dot"></i> <%= post.address %></p>
-                <p class="card-text mb-2">説明：<%= post.body %></p>
-                <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
-                <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
-                <p class="text-muted mb-1">都道府県：<%= post.genre.prefecture %></p>
-    
-    
-                <div class="mt-2">
-                  <% if post.favorited_by?(current_user) %>
-                    <%= link_to post_favorite_path(post), method: :delete, class: "text-danger text-decoration-none" do %>
-                      ♥ <%= post.favorites.count %> いいね
-                    <% end %>
-                  <% else %>
-                    <%= link_to post_favorite_path(post), method: :post, class: "text-muted text-decoration-none" do %>
-                      ♡ <%= post.favorites.count %> いいね
-                    <% end %>
+  <div class="py-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @posts.each do |post| %>
+        <div class="col mb-4">
+          <div class="card h-100 shadow-sm">
+  
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.get_image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+  
+  
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">
+                <%= link_to post.title, post_path(post.id), class: "text-decoration-none text-dark" %>
+              </h5>
+              <p class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-location-dot"></i> <%= post.address %></p>
+              <p class="card-text mb-2">説明：<%= post.body %></p>
+              <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
+              <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
+              <p class="text-muted mb-1">都道府県：<%= post.genre.prefecture %></p>
+  
+  
+              <div class="mt-2">
+                <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorite_path(post), method: :delete, class: "text-danger text-decoration-none" do %>
+                    ♥ <%= post.favorites.count %> いいね
                   <% end %>
-                </div>
+                <% else %>
+                  <%= link_to post_favorite_path(post), method: :post, class: "text-muted text-decoration-none" do %>
+                    ♡ <%= post.favorites.count %> いいね
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
