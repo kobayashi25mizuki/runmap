@@ -21,7 +21,7 @@ class Group < ApplicationRecord
   end
   
   def approved_users
-    group_users.approved.includes(:user).map(&:user)
+    group_users.approved.includes(:user).map(&:user).compact
   end
 
   def self.search_for(content)
