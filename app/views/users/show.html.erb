@@ -54,7 +54,7 @@
               <p class="card-text mb-2">説明：<%= post.body %></p>
               <p class="text-muted mb-1">ユーザーネーム：<%= post.user.name %></p>
               <p class="text-muted mb-1">コメント数：<%= post.post_comments.count %></p>
-              <p class="text-muted mb-1">都道府県：<%= post.genre.prefecture %></p>
+              <p class="text-muted mb-1">都道府県：<%= post.genre.present? ? post.genre.prefecture : "未設定" %></p>
   
   
               <div class="mt-2">
