@@ -3,7 +3,8 @@ class GroupUsersController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     current_user.group_users.create(group_id: @group.id, status: 'pending')
-    redirect_to group_path(@group), application: "参加申請を送りました"
+    flash[:application] = "参加申請を送りました"
+    redirect_to group_path(@group)
   end
 
   def destroy
@@ -15,12 +16,14 @@ class GroupUsersController < ApplicationController
   def approve
     group_user = GroupUser.find(params[:id])
     group_user.update(status: 'approved')
-    redirect_to group_path(params[:group_id]), approval: "参加申請を承認しました"
+    flash[:approval] = "参加申請を承認しました"
+    redirect_to group_path(params[:group_id])
   end
 
   def reject
     group_user = GroupUser.find(params[:id])
-    group_user.update(status: 'rejected')
-    redirect_to group_path(params[:group_id]), rejection: "参加申請を拒否しました"
+    group_user.destroy
+    flash[:rejection] = "参加申請を拒否しました"
+    redirect_to group_path(params[:group_id])
   end
 end

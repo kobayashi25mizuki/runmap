@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get "home/about" => "homes#about", as: "about"
 
-  resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
     resource :group_users, only: [:create, :destroy] do
       member do
         patch :approve
