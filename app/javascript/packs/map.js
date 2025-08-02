@@ -5,7 +5,7 @@
 let map;
 
 async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps", { request: {} });
+  const { Map } = await google.maps.importLibrary("maps");
 
   const mapElement = document.getElementById("map");
   const latitude = parseFloat(mapElement.dataset.lat);
