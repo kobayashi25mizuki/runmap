@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.guest_user?
       flash[:guest_alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-      redirect_to posts_path(current_user)
+      redirect_to user_path(current_user)
     end
   end
 
