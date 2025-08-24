@@ -30,7 +30,12 @@
 - 他人が投稿したコースをお気に入り登録しておき、次の休日に走る時
 ​
 ## 設計書
-後ほど作成予定
+- UI Flows：https://drive.google.com/file/d/1kqEZ-Yguhq9vpLXCKHmlGq0sehV1JABu/view?usp=sharing
+- ER図：https://drive.google.com/file/d/132UqBwhlUGbS_LdaQiaBbREHvPABtexk/view?usp=sharing
+- テーブル定義書：https://docs.google.com/spreadsheets/d/1UNShT2kVP1EW9MwfRrH9SsbbN6XUg7LNvUKpUVo0jo0/edit?usp=sharing
+- アプリケーション詳細設計書：https://docs.google.com/spreadsheets/d/1NlcOl_r0LUn0HlXEA8mBYAsJi6LZ1NfaB-gVsGsZjuw/edit?usp=sharing
+- インフラ設計書：https://docs.google.com/spreadsheets/d/1UABgWwl2Owgg-qYHTfyyFucNPOCOfeDt6JCYShBlqOo/edit?usp=sharing
+- AWS構成図：https://drive.google.com/file/d/1bNt7TOAk2P9aB9wqqN6UkSX6D0FSHX-D/view?usp=sharing
 ​
 ## 開発環境
 - OS：Linux(CentOS)
